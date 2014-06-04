@@ -1,0 +1,37 @@
+# ~/.bashrc
+# Orc Software Bash shell initialization file for the 'orc' and 'informix' users.
+# To be saved as $HOME/.bashrc.
+# Don't forget to create a link as follows: ln -s $HOME/.bashrc $HOME/.bash_profile
+
+# Source global definitions, if any
+if [ -f /etc/bashrc ]; then
+. /etc/bashrc
+fi
+
+# Variables for Orc System and Informix management
+export ORC_ETC=/etc/orc
+export ORC_CONF=$ORC_ETC/orc.conf
+export INFORMIXSERVER=online2
+export INFORMIXDIR=/opt/informix
+export INFORMIXTERM=terminfo
+export PATH=$INFORMIXDIR/bin:$PATH:$ORC_ETC:$ORC_ETC/admintools:/sbin:/usr/sbin
+export EDITOR=/bin/vi
+export PAGER=/usr/bin/less
+# vi: show current mode (insert/replace/append)
+export EXINIT='set showmode'
+# Set username, hostname and full path in the prompt
+export PS1="[\u@\h:\w] "
+
+# Remove limitation for core dump size and stack size
+ulimit -S -c unlimited > /dev/null 2>&1
+ulimit -S -s unlimited > /dev/null 2>&1
+
+# Some useful aliases
+alias rm='rm -i'
+alias cp='cp -i'
+alias ll='ls -la'
+alias h='history'
+alias pwd='/bin/pwd' 
+alias ckl='$ORC_ETC/admintools/orc_log_view'    # ckl = check log
+alias ckd='$ORC_ETC/admintools/orc_log_view -d' # ckd = check debug
+alias ckp='$ORC_ETC/process_status'             # ckp = check processes
